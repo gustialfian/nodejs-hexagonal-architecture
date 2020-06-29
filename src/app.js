@@ -4,14 +4,15 @@ const nowHandler = require('./now/handler')
 async function start() {
   try {
     const server = new Server()
+    await server.setupDB()
 
     server.router.get('/', (_, res) => res.json('safe...'))
-    server.router.get('/now', [logTrafic], await nowHandler.now(server))
+    server.router.get('/now', await nowHandler.now(server))
 
     server.listen()
 
   } catch (error) {
-    console.error(error.message)
+    console.error(error)
   }
 }
 

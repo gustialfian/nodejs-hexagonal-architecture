@@ -1,4 +1,4 @@
-# nodejs-hexagonal-architecture
+# nodejs-simple-architecture
 
 ## TODO
 1. [ ] setup rabbitmq

@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-hexagonal-architecture",
+  "name": "nodejs-simple-architecture",
   "version": "0.0.1",
   "description": "",
   "main": "src/index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gustialfian/nodejs-hexagonal-architecture.git"
+    "url": "git+https://github.com/gustialfian/nodejs-simple-architecture.git"
   },
   "keywords": [],
   "author": "Gusti Alfian M. P.",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gustialfian/nodejs-hexagonal-architecture/issues"
+    "url": "https://github.com/gustialfian/nodejs-simple-architecture/issues"
   },
-  "homepage": "https://github.com/gustialfian/nodejs-hexagonal-architecture#readme",
+  "homepage": "https://github.com/gustialfian/nodejs-simple-architecture#readme",
   "dependencies": {
     "amqplib": "^0.5.6",
     "express": "^4.17.1",
