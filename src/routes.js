@@ -1,10 +1,13 @@
-const nowHandler = require('./now/handler')
 const { aMiddleware, bMiddleware } = require('./lib/middleware')
 
-async function registerRoutes(server) {
+const nowHandler = require('./example/now/handler')
+const pubSubHandler = require('./example/pubSub/handler')
 
-  server.router.get('/', (_, res) => res.json('safe...'))
-  server.router.get('/now', [aMiddleware, bMiddleware], await nowHandler.now(server))
+async function registerRoutes(service) {
+
+  service.router.get('/', (_, res) => res.json('safe...'))
+  service.router.get('/now', [aMiddleware, bMiddleware], await nowHandler.now(service))
+  service.router.get('/pub', await pubSubHandler.index(service))
 
 }
 

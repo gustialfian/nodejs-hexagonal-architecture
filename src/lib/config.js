@@ -9,6 +9,9 @@ const config = {
   db: {
     connString: process.env.PG_CONN_STRING
   },
+  broker: {
+    connString: process.env.RABBITMQ_CONN_STRING
+  },
   jwt: {
     secret: process.env.JWT_SECRET ? process.env.JWT_SECRET : "secret-key",
   },
