@@ -1,15 +1,15 @@
-const { Server } = require('./lib/server')
-const nowHandler = require('./now/handler')
+const { Service } = require('./lib/service')
+const { registerRoutes } = require('./routes')
 
 async function start() {
   try {
-    const server = new Server()
-    await server.setupDB()
+    const service = new Service()
 
-    server.router.get('/', (_, res) => res.json('safe...'))
-    server.router.get('/now', await nowHandler.now(server))
+    await service.setupDB()
 
-    server.listen()
+    await registerRoutes(service)
+
+    service.listen()
 
   } catch (error) {
     console.error(error)

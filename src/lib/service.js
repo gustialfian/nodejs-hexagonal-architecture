@@ -3,7 +3,7 @@ const http = require('http')
 const { setupExpress } = require('./express')
 const { setupDB } = require('./postgresql')
 
-class Server {
+class Service {
   constructor() {
     console.log(`Constructing Server...`)
     
@@ -26,5 +26,5 @@ class Server {
 }
 
 module.exports = {
-  Server,
+  Service,
 }

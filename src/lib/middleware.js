@@ -1,12 +1,15 @@
 
-const logTrafic = (req, res, next) => {
-  console.log({
-    method: req.method,
-    endpoint: req.originalUrl,
-  });
+const aMiddleware = (req, res, next) => {
+  console.log('a');
+  next();
+}
+
+const bMiddleware = (req, res, next) => {
+  console.log('b');
   next();
 }
 
 module.exports = {
-  logTrafic,
+  aMiddleware,
+  bMiddleware,
 }

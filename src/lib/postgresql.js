@@ -1,23 +1,20 @@
 const { Pool } = require('pg')
+const { db: dbConfig } = require('./config')
 
-async function setupDB(configDB) {
+async function setupDB() {
   try {
-    console.log(`configDB: `, configDB)
-  
     const pool = new Pool({
-      host: 'localhost',
-      port: 6543,
-      database: 'sandbox',
-      user: 'sandbox',
-      password: 'sandbox',
+      connectionString: dbConfig.connString,
       max: 50,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 2000,
     })
-  
+
     await pool.query('select now()')
     console.log(`db up`)
-  
+
     return pool
-    
+
   } catch (error) {
     console.error(error)
   }
