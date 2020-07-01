@@ -2,11 +2,16 @@ const amqp = require('amqplib')
 const { broker: brokerConfig } = require('./config')
 
 async function setupBroker() {
-  const connection = await amqp.connect(brokerConfig.connString)
-
-  console.log(`broker up`)
-
-  return connection
+  try {
+    const connection = await amqp.connect(brokerConfig.connString)
+  
+    console.log(`broker up`)
+  
+    return connection
+    
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 module.exports = {

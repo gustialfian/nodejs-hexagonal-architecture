@@ -20,7 +20,9 @@ docker run --name db --rm \
 
 docker run -it --rm \
     --name rabbitmq \
+    -e RABBITMQ_DEFAULT_USER=sandbox \
+    -e RABBITMQ_DEFAULT_PASS=sandbox \
     -p 5672:5672 \
     -p 15672:15672 \
-    rabbitmq:3-management
+    rabbitmq:3.8-management-alpine
 ```

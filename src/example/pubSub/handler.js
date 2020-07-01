@@ -1,10 +1,13 @@
 const { LOGS_EXCHANGE } = require('./constants')
 
 async function index(service) {
+  const emit = msg => service.emit(LOGS_EXCHANGE, msg)
   return async (req, res) => {
     try {
       const msg = 'kucing woiiii'
-      await service.emit(LOGS_EXCHANGE, msg)
+
+      // tidak perlu di await karena publist message itu async
+      emit(msg)
 
       return res.json({
         svc: 'pubSub',
