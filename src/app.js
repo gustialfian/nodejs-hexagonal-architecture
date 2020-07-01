@@ -1,6 +1,7 @@
 const { Service } = require('./lib/service')
+const { setupExpress, listen } = require('./lib/express')
 const { registerRoutes } = require('./routes')
-const { testSubscriber } = require('./example/pubSub/subscriber')
+const { registerSubscriber } = require('./subscribers')
 
 async function start() {
   try {
@@ -8,13 +9,12 @@ async function start() {
 
     await service.setupDB()
     await service.setupBroker()
-
-    // pub sub
-    testSubscriber(service)
-
-    await registerRoutes(service)
-
-    service.listen()
+    
+    await registerRoutes(service, server)
+    await registerSubscriber(service)
+    
+    const server = setupExpress()
+    listen(server)
   } catch (error) {
     console.error(error)
   }

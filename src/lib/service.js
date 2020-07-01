@@ -1,31 +1,18 @@
-const http = require('http')
-
-const { setupExpress } = require('./express')
 const { setupDB } = require('./postgresql')
 const { setupBroker } = require('./rabbitmq')
 
 class Service {
   constructor() {
-    console.log(`Constructing Server...`)
-
-    // sync dependencies
-    this.router = setupExpress()
+    console.log(`Constructing Service...`)
 
     // async dependencies
-    this._db = null
+    this.db = null
     this._broker = null
-  }
-
-  listen() {
-    const server = http.createServer(this.router)
-    server.listen(3000, () => {
-      console.log(`Listening on localhost:${3000}`)
-    })
   }
 
   async setupDB() {
     try {
-      this._db = await setupDB()
+      this.db = await setupDB()
     } catch (error) {
       throw error
     }
@@ -39,7 +26,7 @@ class Service {
     }
   }
 
-  async emit(exchange, message) {
+  async publish(exchange, message) {
     try {
       const channel = await this._broker.createChannel()
 
@@ -50,6 +37,29 @@ class Service {
 
     } catch (error) {
       throw error
+    }
+  }
+
+  async subscribe(exchange, cb) {
+    try {
+      const channel = await this._broker.createChannel()
+  
+      await channel.assertExchange(exchange, 'fanout', { durable: false })
+      const q = await channel.assertQueue('', { exclusive: true })
+  
+      channel.bindQueue(q.queue, exchange, '')
+  
+      console.log("testSubscriber listeningg", q.queue)
+  
+      await channel.consume(q.queue, function (msg) {
+        cb(msg)
+      }, {
+        noAck: true
+      });
+  
+    } catch (error) {
+      console.log(`error`, error)
+  
     }
   }
 }

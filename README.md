@@ -1,13 +1,12 @@
 # nodejs-simple-architecture
 
 ## TODO
-1. [ ] setup rabbitmq
+1. [x] setup rabbitmq
 2. [ ] setup log
 3. [ ] setup mongodb
-4. [ ] interface pub sub
-5. [ ] internal event
-6. [ ] gracefull shutdown
-7. [ ] design server API
+4. [x] interface pub sub
+5. [ ] gracefull shutdown
+6. [ ] design service API
 
 ## docker 
 ```bash
@@ -18,8 +17,7 @@ docker run --name db --rm \
   -p 6543:5432 \
   postgres:13-alpine
 
-docker run -it --rm \
-    --name rabbitmq \
+docker run --name rabbitmq --rm \
     -e RABBITMQ_DEFAULT_USER=sandbox \
     -e RABBITMQ_DEFAULT_PASS=sandbox \
     -p 5672:5672 \

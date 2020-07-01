@@ -1,7 +1,5 @@
 
-async function now(server) {
-  const db = server._db
-
+async function now({ db }) {
   return async (req, res) => {
     const result = await db.query('select now()')
     const now = result.rows[0].now
@@ -13,6 +11,6 @@ async function now(server) {
   }
 }
 
-module.exports = { 
+module.exports = {
   now
 }

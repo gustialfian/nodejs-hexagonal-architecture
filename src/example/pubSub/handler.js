@@ -5,8 +5,7 @@ async function index(service) {
     try {
       const msg = 'kucing woiiii'
 
-      // tidak perlu di await karena publist message itu async
-      await service.emit(LOGS_EXCHANGE, msg)
+      await service.publish(LOGS_EXCHANGE, msg)
 
       return res.json({
         svc: 'pubSub',
