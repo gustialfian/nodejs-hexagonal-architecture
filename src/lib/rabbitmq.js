@@ -10,7 +10,7 @@ async function setupBroker() {
     return connection
     
   } catch (error) {
-    console.error(error)
+    throw error
   }
 }
 

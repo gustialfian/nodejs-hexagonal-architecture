@@ -17,7 +17,7 @@ async function setupDB() {
     return pool
 
   } catch (error) {
-    console.error(error)
+    throw error
   }
 }
 
@@ -35,7 +35,7 @@ async function setupPostgres() {
 
     return sql
   } catch (error) {
-
+    throw error
   }
 }
 
