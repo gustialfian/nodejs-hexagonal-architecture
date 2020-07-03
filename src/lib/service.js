@@ -1,25 +1,18 @@
-const { setupDB } = require('./postgresql')
+const { setupPostgres } = require('./postgresql')
 const { setupBroker } = require('./rabbitmq')
 
 class Service {
   constructor() {
     console.log(`Constructing Service...`)
 
-    // async dependencies
-    this.db = null
+    // dependencies
+    this.sql = null
     this._broker = null
   }
 
-  async setupDB() {
+  async setup() {
     try {
-      this.db = await setupDB()
-    } catch (error) {
-      throw error
-    }
-  }
-
-  async setupBroker() {
-    try {
+      this.sql = await setupPostgres()
       this._broker = await setupBroker()
     } catch (error) {
       throw error
@@ -49,17 +42,15 @@ class Service {
   
       channel.bindQueue(q.queue, exchange, '')
   
-      console.log("testSubscriber listeningg", q.queue)
-  
       await channel.consume(q.queue, function (msg) {
-        cb(msg)
+        cb(null, msg)
       }, {
         noAck: true
       });
   
     } catch (error) {
-      console.log(`error`, error)
-  
+      cb(error, null)
+      throw error
     }
   }
 }

@@ -1,11 +1,11 @@
 
 const aMiddleware = (req, res, next) => {
-  console.log('a');
+  console.log('global middleware a');
   next();
 }
 
 const bMiddleware = (req, res, next) => {
-  console.log('b');
+  console.log('global middleware b');
   next();
 }
 

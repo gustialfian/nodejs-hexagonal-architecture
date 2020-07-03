@@ -1,4 +1,5 @@
 const { Pool } = require('pg')
+const postgres = require('postgres')
 const { db: dbConfig } = require('./config')
 
 async function setupDB() {
@@ -20,6 +21,25 @@ async function setupDB() {
   }
 }
 
+async function setupPostgres() {
+  try {
+    const sql = postgres(dbConfig.connString, {
+      max             : 10,         // Max number of connections
+      idle_timeout    : 0,          // Idle connection timeout in seconds
+      connect_timeout : 30,         // Connect timeout in seconds
+    }) // will default to the same as psql
+
+    const result = await sql`select now()`
+    console.log(result)
+    console.log(`db up`)
+
+    return sql
+  } catch (error) {
+
+  }
+}
+
 module.exports = {
   setupDB,
+  setupPostgres,
 }

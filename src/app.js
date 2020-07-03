@@ -6,14 +6,13 @@ const { registerSubscriber } = require('./subscribers')
 async function start() {
   try {
     const service = new Service()
+    await service.setup()
 
-    await service.setupDB()
-    await service.setupBroker()
+    const server = setupExpress()
     
     await registerRoutes(service, server)
     await registerSubscriber(service)
     
-    const server = setupExpress()
     listen(server)
   } catch (error) {
     console.error(error)
