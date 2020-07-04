@@ -1,10 +1,10 @@
 const { PROD_ENV, DEV_ENV, TEST_ENV } = require('./constants')
-const env = process.env.APP_ENV ? process.env.APP_ENV : DEV_ENV
+const env = process.env.APP_ENV || DEV_ENV
 
 const config = {
   app: {
     env,
-    port: process.env.APP_PORT,
+    port: process.env.APP_PORT || 3000,
   },
   db: {
     connString: process.env.PG_CONN_STRING
@@ -13,7 +13,7 @@ const config = {
     connString: process.env.RABBITMQ_CONN_STRING
   },
   jwt: {
-    secret: process.env.JWT_SECRET ? process.env.JWT_SECRET : "secret-key",
+    secret: process.env.JWT_SECRET || "secret-key",
   },
   isProd: () => env === PROD_ENV,
   isDev: () => env === DEV_ENV,
