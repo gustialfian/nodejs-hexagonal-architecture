@@ -30,7 +30,6 @@ async function setupPostgres() {
     }) // will default to the same as psql
 
     const result = await sql`select now()`
-    console.log(result)
     console.log(`db up`)
 
     return sql
