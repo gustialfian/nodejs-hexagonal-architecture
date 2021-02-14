@@ -1,12 +1,13 @@
 # nodejs-simple-architecture
 
 ## TODO
-1. [x] setup rabbitmq
-2. [ ] setup log
-3. [ ] setup mongodb
-4. [x] interface pub sub
-5. [ ] gracefull shutdown
-6. [ ] design service API
+1. [ ] migrate to ts
+2. [x] setup rabbitmq
+3. [ ] setup log
+4. [ ] setup mongodb
+5. [x] interface pub sub
+6. [ ] gracefull shutdown
+7. [ ] design service API
 
 ## docker 
 ```bash
